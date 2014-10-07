@@ -11,6 +11,9 @@ Gem::Specification.new do |spec|
   spec.summary       = "Provides Wisper with asynchronous event publishing using ActiveJob"
   spec.description   = "Provides Wisper with asynchronous event publishing using ActiveJob"
   spec.homepage      = "https://github.com/krisleech/wisper-activejob"
+
+  spec.required_ruby_version = '>= 1.9.3'
+
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
