@@ -1,4 +1,5 @@
 require 'wisper/active_job/version'
-require 'active_job'
+# require 'active_job'
+require 'rails/all'
 require 'wisper'
 require 'wisper/active_job_broadcaster'

@@ -3,8 +3,6 @@ require 'wisper/active_job/version'
 # require 'active_job'
 require 'rails/all'
 
-require 'pry'
-
 module Wisper
   class ActiveJobBroadcaster
     def broadcast(subscriber, publisher, event, args)
