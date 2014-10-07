@@ -3,11 +3,7 @@ require 'simplecov'
 
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 
-SimpleCov.start { add_filter 'spec/dummy_app' }
-
-if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
-  YAML::ENGINE.yamler = 'psych'
-end
+SimpleCov.start
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

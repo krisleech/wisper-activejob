@@ -18,5 +18,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'wisper'
-  spec.add_dependency 'activejob'
+  # spec.add_dependency 'activejob'
+  # spec.add_dependency 'rails' # unreleased
 end

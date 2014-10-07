@@ -1,11 +1,5 @@
 require 'wisper/active_job'
 
-require_relative 'dummy_app/app'
-
-require 'sidekiq/api'
-
-require 'pry'
-
 RSpec.describe 'integration tests:' do
   let(:publisher) do
     Class.new do
@@ -17,25 +11,26 @@ RSpec.describe 'integration tests:' do
     end.new
   end
 
-  before do
-    ActiveJob::Base.queue_adapter = :sidekiq
-    Sidekiq::Queue.new.clear
-    Sidekiq::RetrySet.new.clear
-    File.delete('/tmp/shared') if File.exist?('/tmp/shared')
+  let(:subscriber) do
+    Class.new do
+      def self.it_happened
+        # noop
+      end
+    end
   end
 
-  it 'performs event in a different process' do
-    publisher.subscribe(Subscriber, async: Wisper::ActiveJobBroadcaster.new)
+  let(:adapter) { ActiveJob::Base.queue_adapter }
+
+  before do
+    ActiveJob::Base.queue_adapter = :test
+    ActiveJob::Base.queue_adapter.enqueued_jobs.clear
+  end
+
+  it 'puts job on ActiveJob queue' do
+    publisher.subscribe(subscriber, async: Wisper::ActiveJobBroadcaster.new)
 
     publisher.run
 
-    Timeout.timeout(5) do
-      while !File.exist?('/tmp/shared')
-        sleep(0.1)
-      end
-    end
-
-    shared_content = File.read('/tmp/shared')
-    expect(shared_content).not_to eq "pid: #{Process.pid}\n"
+    expect(adapter.enqueued_jobs.size).to eq 1
   end
 end
