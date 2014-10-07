@@ -1,4 +1,4 @@
-# Wisper::Activejob
+# Wisper::ActiveJob
 
 Provides [Wisper](https://github.com/krisleech/wisper) with asynchronous event
 publishing using
