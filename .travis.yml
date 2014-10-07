@@ -4,6 +4,5 @@ bundler_args: --without=extras
 rvm:
   - jruby-19mode
   - rbx-2
-  - 2.0.0
-  - 2.1
+  - 1.9.3
   - 2.2

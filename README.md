@@ -1,31 +1,43 @@
 # Wisper::Activejob
 
-TODO: Write a gem description
+Provides [Wisper](https://github.com/krisleech/wisper) with asynchronous event
+publishing using
+[ActiveJob](https://github.com/rails/rails/tree/master/activejob).
+
+[![Gem Version](https://badge.fury.io/rb/wisper-activejob.png)](http://badge.fury.io/rb/wisper-activejob)
+[![Code Climate](https://codeclimate.com/github/krisleech/wisper-activejob.png)](https://codeclimate.com/github/krisleech/wisper-activejob)
+[![Build Status](https://travis-ci.org/krisleech/wisper-activejob.png?branch=master)](https://travis-ci.org/krisleech/wisper-activejob)
+[![Coverage Status](https://coveralls.io/repos/krisleech/wisper-activejob/badge.png?branch=master)](https://coveralls.io/r/krisleech/wisper-activejob?branch=master)
 
 ## Installation
-
-Add this line to your application's Gemfile:
 
 ```ruby
 gem 'wisper-activejob'
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install wisper-activejob
-
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+publisher.subscribe(MyListener, async: true)
+```
+
+The listener must be a class (or module), not an object. This is because ActiveJob
+can not reconstruct the state of an object. Whereas a class has no state.
+
+When publshing events the arguments must be simple types as they need to be
+serialized, or the object must include `GlobalID` such as `ActiveRecord` models.
+
+* [ActiveJob guide](http://edgeguides.rubyonrails.org/active_job_basics.html)
+* [GlobalID](https://github.com/rails/globalid)
+
+## Compatibility
+
+1.9.3+ including JRuby and Rubinius.
+
+See the [build status](https://travis-ci.org/krisleech/wisper-activejob) for details.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/wisper-activejob/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+Please send a [Pull Request](https://github.com/krisleech/wisper-activejob/pulls)
+or an [Issue](https://github.com/krisleech/wisper-activejob/issues) to discuss
+your idea first.
