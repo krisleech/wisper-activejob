@@ -2,7 +2,5 @@ language: ruby
 script: rspec spec
 bundler_args: --without=extras
 rvm:
-  - jruby-19mode
   - rbx-2
-  - 1.9.3
   - 2.2
