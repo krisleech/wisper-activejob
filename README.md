@@ -24,6 +24,16 @@ publisher.subscribe(MyListener, async: true)
 The listener must be a class (or module), not an object. This is because ActiveJob
 can not reconstruct the state of an object. Whereas a class has no state.
 
+Additionally, you should also ensure that your methods used to handle events under `MyListener` are all declared as class methods:
+
+```ruby
+class MyListener
+  def self.event_name
+  end
+end
+```
+
+
 When publshing events the arguments must be simple types as they need to be
 serialized, or the object must include `GlobalID` such as `ActiveRecord` models.
 
