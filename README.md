@@ -51,3 +51,12 @@ See the [build status](https://travis-ci.org/krisleech/wisper-activejob) for det
 Please send a [Pull Request](https://github.com/krisleech/wisper-activejob/pulls)
 or an [Issue](https://github.com/krisleech/wisper-activejob/issues) to discuss
 your idea first.
+
+## Releasing
+
+* Bump VERSION
+* Push to master
+* git tag -a 'v<VERSION>' -m 'v<VERSION>'
+* git push --tags
+* rake build
+* rake release
