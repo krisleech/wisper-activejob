@@ -56,7 +56,5 @@ your idea first.
 
 * Bump VERSION
 * Push to master
-* git tag -a 'v<VERSION>' -m 'v<VERSION>'
-* git push --tags
 * rake build
 * rake release
