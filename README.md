@@ -40,6 +40,14 @@ serialized, or the object must include `GlobalID` such as `ActiveRecord` models.
 * [ActiveJob guide](http://edgeguides.rubyonrails.org/active_job_basics.html)
 * [GlobalID](https://github.com/rails/globalid)
 
+## Advanced options
+
+You can also customize queue name, retry value and other queue options when registering the listener like the following:
+
+```ruby
+publisher.subscribe(MyListener, async: { queue: 'custom', retry: false })
+```
+
 ## Compatibility
 
 1.9.3+ including JRuby and Rubinius.

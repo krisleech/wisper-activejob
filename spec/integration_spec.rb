@@ -26,11 +26,22 @@ RSpec.describe 'integration tests:' do
     ActiveJob::Base.queue_adapter.enqueued_jobs.clear
   end
 
-  it 'puts job on ActiveJob queue' do
-    publisher.subscribe(subscriber, async: Wisper::ActiveJobBroadcaster.new)
+  context 'when broadcaster is plain object' do
+    it 'puts job on ActiveJob queue' do
+      publisher.subscribe(subscriber, async: Wisper::ActiveJobBroadcaster.new)
+      publisher.run
+      expect(adapter.enqueued_jobs.size).to eq 1
+    end
+  end
 
-    publisher.run
 
-    expect(adapter.enqueued_jobs.size).to eq 1
+  context 'when broadcaster is async and passes options' do
+    it 'puts job on ActiveJob queue' do
+      pending('Pending until wisper support for async options is published')
+
+      publisher.subscribe(subscriber, async: { queue: 'default' })
+      publisher.run
+      expect(adapter.enqueued_jobs.size).to eq 1
+    end
   end
 end

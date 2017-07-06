@@ -4,8 +4,14 @@ require 'active_job'
 
 module Wisper
   class ActiveJobBroadcaster
+    attr_reader :options
+
+    def initialize(options = {})
+      @options = options == true ? {} : options
+    end
+
     def broadcast(subscriber, publisher, event, args)
-      Wrapper.perform_later(subscriber.name, event, args)
+      Wrapper.set(options).perform_later(subscriber.name, event, args)
     end
 
     class Wrapper < ::ActiveJob::Base
@@ -19,8 +25,8 @@ module Wisper
 
     def self.register
       Wisper.configure do |config|
-        config.broadcaster :active_job, ActiveJobBroadcaster.new
-        config.broadcaster :async,      ActiveJobBroadcaster.new
+        config.broadcaster :active_job, Proc.new { |options| ActiveJobBroadcaster.new(options) }
+        config.broadcaster :async,      Proc.new { |options| ActiveJobBroadcaster.new(options) }
       end
     end
   end
