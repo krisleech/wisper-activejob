@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gemspec path: '../'
+
+gem 'activejob', '~> 5.0'
+
+gem 'bundler'
+gem 'rake'
+gem 'rspec'
+gem 'coveralls', require: false
