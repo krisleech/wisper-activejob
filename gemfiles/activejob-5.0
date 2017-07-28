@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec path: '../'
 
-gem 'rails', '~> 5.0'
+gem 'activejob', '~> 5.0'
 
 gem 'bundler'
 gem 'rake'
