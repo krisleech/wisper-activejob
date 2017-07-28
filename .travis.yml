@@ -7,9 +7,4 @@ gemfile:
   - gemfiles/activejob-4.0
   - gemfiles/activejob-5.0
 rvm:
-  - rbx-2
   - '2.4.0'
-matrix:
-  exclude:
-    - rvm: rbx-2
-      gemfile: gemfiles/activejob-5.0
