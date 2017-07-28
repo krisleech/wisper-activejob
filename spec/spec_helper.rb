@@ -5,6 +5,11 @@ SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 
 SimpleCov.start
 
+require 'wisper/active_job'
+
+puts "Using ActiveJob version #{ActiveJob::VERSION::STRING}"
+puts
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
