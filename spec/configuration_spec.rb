@@ -1,5 +1,3 @@
-require 'wisper/active_job'
-
 RSpec.describe 'configuration' do
   let(:configuration) { Wisper.configuration }
 

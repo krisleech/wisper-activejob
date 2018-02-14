@@ -1,5 +1,3 @@
-require 'wisper/active_job'
-
 RSpec.describe 'integration tests:' do
   let(:publisher) do
     Class.new do
