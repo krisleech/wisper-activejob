@@ -34,7 +34,7 @@ end
 ```
 
 
-When publshing events the arguments must be simple types as they need to be
+When publishing events the arguments must be simple types as they need to be
 serialized, or the object must include `GlobalID` such as `ActiveRecord` models.
 
 * [ActiveJob guide](http://edgeguides.rubyonrails.org/active_job_basics.html)
