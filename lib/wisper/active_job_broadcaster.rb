@@ -5,7 +5,8 @@ require 'active_job'
 module Wisper
   class ActiveJobBroadcaster
     def broadcast(subscriber, publisher, event, args)
-      Wrapper.perform_later(subscriber.name, event, args)
+      wrapper = subscriber.respond_to?(:queue) ? Wrapper.set(queue: subscriber.queue) : Wrapper
+      wrapper.perform_later(subscriber.name, event, args)
     end
 
     class Wrapper < ::ActiveJob::Base

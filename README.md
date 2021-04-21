@@ -33,6 +33,20 @@ class MyListener
 end
 ```
 
+### Running subscriber in a specific queue
+
+All jobs are by default enqueued in the `default` queue. You can however specify for a listener which queue to use by implementing a `queue` class method:
+
+```ruby
+class MyListener
+  def self.queue
+    :fast
+  end
+
+  def self.event_name
+  end
+end
+```
 
 When publishing events the arguments must be simple types as they need to be
 serialized, or the object must include `GlobalID` such as `ActiveRecord` models.
