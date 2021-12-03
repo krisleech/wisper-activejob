@@ -1,0 +1,16 @@
+name: Build and Publish Ruby Gem on Tag Pushes
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and Publish Ruby Gem on Tag Pushes
+      uses: bodyshopbidsdotcom/gh-action-publish-gem-on-tag@c94ab176793965997270a433344a6644e607f8ba
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        owner: ImmersiveLabsUkOrg

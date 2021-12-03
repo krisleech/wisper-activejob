@@ -28,17 +28,34 @@ Additionally, you should also ensure that your methods used to handle events und
 
 ```ruby
 class MyListener
-  def self.event_name
+  def self.event_name(arg1, arg2)
   end
 end
 ```
 
+If you prefer to have a job class for each event listener, have your listener extend from `ActiveJob::Base`, include
+`Wisper::ActiveJob::Listener` in it, and Wisper will automatically use this job instead of its own internal
+wrapper job:
+
+```ruby
+class MyImportantListener < ApplicationJob
+  include Wisper::ActiveJob::Listener
+
+  queues_as :high_priority
+
+  def self.event_name(arg1, arg2)
+  end
+end
+```
+
+This can help with observability and prioritisation, since you can give different listeners different priorities, and
+they can be distinguished in APM software with ActiveJob integrations such as Datadog.
 
 When publishing events the arguments must be simple types as they need to be
 serialized, or the object must include `GlobalID` such as `ActiveRecord` models.
 
-* [ActiveJob guide](http://edgeguides.rubyonrails.org/active_job_basics.html)
-* [GlobalID](https://github.com/rails/globalid)
+- [ActiveJob guide](http://edgeguides.rubyonrails.org/active_job_basics.html)
+- [GlobalID](https://github.com/rails/globalid)
 
 ## Compatibility
 
@@ -54,7 +71,7 @@ your idea first.
 
 ## Releasing
 
-* Bump VERSION
-* Push to master
-* rake build
-* rake release
+- Bump VERSION
+- Push to master
+- rake build
+- rake release
